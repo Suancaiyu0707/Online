@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--Spring中BeanFactoryPostProcessor和BeanPostProcessor都是Spring初始化bean时对外暴露的扩展点。
+    两个接口从名字看起来很相似，但是作用及使用场景却不同-->
+    <!-- 注册一个BeanPostProcessor -->
+    <bean id="postProcessor" class="com.online.springtest.service.impl.PostProcessor" />
+
+    <!-- 注册一个BeanFactoryPostProcessor -->
+    <bean id="factoryPostProcessor" class="com.online.springtest.service.impl.FactoryPostProcessor"/>
+    <!-- 普通bean -->
+    <bean id="user" class="spring.User">
+        <property name="name" value="张三"/>
+        <property name="sex" value="男"/>
+    </bean>
+    <bean id="testService1" class="com.online.springtest.service.impl.TestService1Impl">
+    </bean>
+
+    <bean id="testService2" class="com.online.springtest.service.impl.TestService1Imp2">
+        <property name="testService1" ref="testService1"/>
+    </bean>
+</beans>

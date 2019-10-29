@@ -1,0 +1,98 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<beans xmlns="http://www.springframework.org/schema/beans"-->
+       <!--xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+       <!--xmlns:context="http://www.springframework.org/schema/context"-->
+       <!--xmlns:util="http://www.springframework.org/schema/util"-->
+       <!--xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">-->
+
+    <!--&lt;!&ndash;<context:component-scan base-package="me.j360.dubbo.shiro"/>&ndash;&gt;-->
+
+    <!--<bean id="whiteListcredentialsMatcher" class="org.apache.shiro.authc.credential.SimpleCredentialsMatcher">-->
+
+    <!--</bean>-->
+
+
+    <!--&lt;!&ndash; 会话管理器 &ndash;&gt;-->
+    <!--<bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">-->
+        <!--<property name="sessionValidationSchedulerEnabled" value="false"/>-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash;使用原生的HttpSession，所有的分享的内容,sessionManager暂不使用&ndash;&gt;-->
+    <!--<bean id="servletContainerSessionManager" class="org.apache.shiro.web.session.mgt.ServletContainerSessionManager"/>-->
+
+    <!--&lt;!&ndash;&lt;!&ndash; Subject工厂 &ndash;&gt;&ndash;&gt;-->
+    <!--&lt;!&ndash;<bean id="subjectFactory"&ndash;&gt;-->
+          <!--&lt;!&ndash;class="xxx.xxx.StatelessDefaultSubjectFactory"/>&ndash;&gt;-->
+
+    <!--<bean id="atLeastOneSuccessfulStrategy" class="org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy"/>-->
+
+    <!--&lt;!&ndash; 认证authenticator配置 &ndash;&gt;-->
+    <!--<bean id="authenticator" class="org.apache.shiro.authc.pam.ModularRealmAuthenticator">-->
+        <!--<property name="authenticationStrategy" ref="atLeastOneSuccessfulStrategy"/>-->
+        <!--<property name="realms">-->
+            <!--<list>-->
+                <!--<ref bean="userRealm"/>-->
+                <!--<ref bean="authclessRealm"/>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash; 授权authorizer配置 &ndash;&gt;-->
+    <!--<bean id="authorizer" class="org.apache.shiro.authz.ModularRealmAuthorizer">-->
+        <!--<property name="realms">-->
+            <!--<list>-->
+                <!--<ref bean="userRealm"/>-->
+                <!--<ref bean="authclessRealm"/>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash;会通过不同的Token进行support&ndash;&gt;-->
+    <!--<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">-->
+        <!--<property name="subjectDAO.sessionStorageEvaluator.sessionStorageEnabled"-->
+                  <!--value="false"/>-->
+        <!--<property name="subjectFactory" ref="subjectFactory"/>-->
+        <!--<property name="sessionManager" ref="servletContainerSessionManager"/>-->
+        <!--<property name="authenticator" ref="authenticator"/>-->
+        <!--<property name="authorizer" ref="authorizer"/>-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash; 相当于调用SecurityUtils.setSecurityManager(securityManager) &ndash;&gt;-->
+    <!--<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">-->
+        <!--<property name="staticMethod" value="org.apache.shiro.SecurityUtils.setSecurityManager"/>-->
+        <!--<property name="arguments" ref="securityManager"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="authclessFilter" class="xxx.xxx.xxx.StatelessAuthclessFilter" />-->
+
+
+    <!--&lt;!&ndash; Shiro的Web过滤器 &ndash;&gt;-->
+    <!--<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">-->
+        <!--<property name="securityManager" ref="securityManager"/>-->
+        <!--<property name="filters">-->
+            <!--<util:map>-->
+                <!--<entry key="authcless" value-ref="authclessFilter"/>-->
+            <!--</util:map>-->
+        <!--</property>-->
+
+        <!--<property name="filterChainDefinitions">-->
+            <!--<value>-->
+                <!--&lt;!&ndash;for test-->
+                <!--/** = anon&ndash;&gt;-->
+                <!--&lt;!&ndash;匿名接口&ndash;&gt;-->
+                <!--/static/** = anon-->
+                <!--/html/** = anon-->
+                <!--/css/** = anon-->
+                <!--&lt;!&ndash;身份验证&ndash;&gt;-->
+                <!--/api/** = context,smart-->
+
+            <!--</value>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash; Shiro生命周期处理器&ndash;&gt;-->
+    <!--<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>-->
+
+
+
+<!--</beans>-->

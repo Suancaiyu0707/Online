@@ -1,0 +1,4 @@
+#key=拓展点实现类全路径名称，其中key作为dubbo spi注解中的传入参数
+impl1=com.online.SPI.impl.AdaptiveProtocolImpl1
+impl2=com.online.SPI.impl.AdaptiveProtocolImpl2
+impl3=com.online.SPI.impl.AdaptiveProtocolImpl3
