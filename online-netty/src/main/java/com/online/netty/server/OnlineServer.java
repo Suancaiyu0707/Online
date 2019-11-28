@@ -89,9 +89,11 @@ public class OnlineServer {
 //            logger.info("channel config is:"+channel.config());
             //获取channel的CloseFuture，并且阻塞当前线程直到它完成，也就是阻塞直到服务器的channel关闭
             //这里只是获取服务器的channel的closefuture，并不会关闭closefuture，反而通过sync()可以保证程序不会执行完，也就是服务端不会关闭
+            //future.channel().closeFuture()表示等待NioServerSocketChannel关闭，默认是异步的。加上sync就表示同步等待了，这样在没有关闭之前，就不会调用finally的代码
             ChannelFuture closefuture = future.channel().closeFuture().sync();
             closefuture.addListener(new CloseSuccessListener());
         }finally{
+            //这两个关闭之后，NioEventLoop也会退出
             bossGroup.shutdownGracefully().sync();//关闭EventLoopGroup并释放资源
             workerGroup.shutdownGracefully();
         }

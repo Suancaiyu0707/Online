@@ -35,6 +35,7 @@ public class RateLimiterTest {
 //            }else{
 //                System.out.println("没有获得令牌桶:");
 //            }
+
             limiter.acquire();
             executor.execute(task);
 

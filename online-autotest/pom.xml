@@ -237,6 +237,20 @@
                     </properties>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Premain-Class>com.online.J2SE.agent.PreMainTraceAgent</Premain-Class>
+                            <!--<Agent-Class>com.dianping.rhino.agent.AgentBoot</Agent-Class>-->
+                            <Can-Redefine-Classes>true</Can-Redefine-Classes>
+                            <Can-Retransform-Classes>true</Can-Retransform-Classes>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
